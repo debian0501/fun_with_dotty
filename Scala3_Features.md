@@ -1,6 +1,6 @@
 # Neue Features in Scala 3
 
-Voraussichtlich im Herbst 2020 wird mit Scala 3 das nächste große Release einer Programmiersprache kommen, die sich die Verschmelzung von typisierter objektorientierter und funktionaler Programmierung auf die Fahnen geschrieben hat. Die Arbeit an Scala 3 hat bereits vor sechs Jahren im Rahmen des Projekts [Dotty](https://dotty.epfl.ch/) begonnen. Ziel von Dotty war herauszufinden, wie ein neues Scala aussehen könnte. Mittlerweile ist klar: Dotty wird das neue Scala 3. Bei der Entwicklung standen diese Hauptziele im Fokus:
+Voraussichtlich im Herbst 2020 wird mit Scala 3 das nächste große Release einer Programmiersprache kommen, die sich die Verschmelzung von typisierter objektorientierter und funktionaler Programmierung auf die Fahnen geschrieben hat. Die Arbeit an Scala 3 hat bereits vor sieben Jahren im Rahmen des Projekts [Dotty](https://dotty.epfl.ch/) begonnen. Ziel von Dotty war herauszufinden, wie ein neues Scala aussehen könnte. Mittlerweile ist klar: Dotty wird das neue Scala 3. Bei der Entwicklung standen diese Hauptziele im Fokus:
 * Scala mit dem [DOT-Kalkül](https://www.scala-lang.org/blog/2016/02/03/essence-of-scala.html)  auf eine neue theoretische Basis stellen.
 * Den Einstieg in die Sprache erleichtern, durch Zügeln mächtiger Sprachkonstrukte, etwa Implicits.
 * Die Konsistenz und Aussagekraft der Sprachkonstrukte weiter verbessern. 
