@@ -1,4 +1,4 @@
-val dottyVersion = "0.20.0-RC1"
+val dottyVersion = "0.21.0-RC1"
 
 // Let 'sbt clean' remove files that may cause the editor to get out-of-sync
 // with the compiler.
@@ -15,7 +15,7 @@ lazy val root = project
     // Without -Yindent-colons, the editor and compiler get out of sync for me - Per
     scalacOptions += "-Yindent-colons",
 
-    libraryDependencies += "com.factor10" %% "intent" % "0.3.0",
+    libraryDependencies += "com.factor10" %% "intent" % "0.4.0",
     testFrameworks += new TestFramework("intent.sbt.Framework")
 
 
