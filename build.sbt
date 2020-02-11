@@ -1,4 +1,4 @@
-val dottyVersion = "0.21.0-RC1"
+val dottyVersion = "0.22.0-RC1"
 
 // Let 'sbt clean' remove files that may cause the editor to get out-of-sync
 // with the compiler.
