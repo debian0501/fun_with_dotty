@@ -12,10 +12,11 @@ lazy val root = project
     version := "0.1.0",
 
     scalaVersion := dottyVersion,
-    // Without -Yindent-colons, the editor and compiler get out of sync for me - Per
-    scalacOptions += "-Yindent-colons",
+    scalacOptions ++= Seq("-Yindent-colons", 
+                          //"-Yexplicit-nulls"
+    ),
 
-    libraryDependencies += "com.factor10" %% "intent" % "0.4.0",
+    libraryDependencies += "com.factor10" %% "intent" % "0.5.0",
     testFrameworks += new TestFramework("intent.sbt.Framework")
 
 

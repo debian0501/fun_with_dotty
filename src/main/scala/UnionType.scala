@@ -11,10 +11,10 @@ def area(s: Rectangle | Square | Circle) :Double =
 
 
 
-def size(number:String | Int) : Int = 
+def size(number:String | Int): Int = 
     number match {
-        case s:String => s.size
-        case n:Int => n
+        case s: String => s.size
+        case n: Int => n
     }
 
 val numberSize  = size(1234)   //1234

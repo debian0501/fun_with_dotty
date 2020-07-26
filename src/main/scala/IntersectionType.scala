@@ -1,22 +1,14 @@
-trait A {
-    def message : String
-}
-trait Capitalizable extends A {
-  def uppercase(s: String) : String = message.toUpperCase
+trait UpperCaseable 
+  def uppercase(s: String) : String =  s.toUpperCase
 
-}
-trait Reversable extends A {
-  def reverse : String = message.reverse
-}
+trait Reversable 
+  def reverse(s: String) : String = s.reverse
+    
+def convert(in: String, c: UpperCaseable & Reversable) : String = 
+    c.uppercase(c.reverse(in))
 
-class B extends A with Reversable with Capitalizable {
-    val message = "Hello"
-}
+class Converter 
+  extends UpperCaseable with Reversable
 
-def reversUppercase(m: Capitalizable & Reversable) : String = 
-    s"${m.reverse} ${m.uppercase}"
-
-   
-def main() = {
-    println(reversUppercase(new B))
-}
+@main def testIntersection() = 
+    println(convert("racecar", Converter()))
