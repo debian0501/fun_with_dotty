@@ -1,15 +1,15 @@
 package Monoids
 
-trait Monoid[T] 
+trait Monoid[T]:
     def combine(a: T, b: T) : T
     def unit : T
 
-given sumMonoid as Monoid[Int] 
+given sumMonoid as Monoid[Int]:
     def combine(a: Int, b: Int) : Int =
         a + b
     def unit : Int = 0
 
-given strMonoid as Monoid[String] 
+given strMonoid as Monoid[String]:
     def combine(a: String, b: String) : String =
         a + b
     def unit : String = ""

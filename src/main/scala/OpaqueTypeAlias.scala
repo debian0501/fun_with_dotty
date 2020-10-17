@@ -11,7 +11,7 @@ object OpaqueType {
     }
 }
 
-def test() = {
+@main def testOpaque() = {
     import OpaqueType._
     val n = Nat(1)
 }

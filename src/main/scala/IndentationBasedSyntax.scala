@@ -1,5 +1,5 @@
 
-object Algorithm 
+object Algorithm:
 
     def calc(a: Int, b: Int) : Int =
         var res = a * b

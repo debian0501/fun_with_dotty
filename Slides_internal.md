@@ -27,7 +27,6 @@ Note:
 * IT Architekt MaibornWolff Gmbh 
 * Muttersprache: Java
 * Hobby: FP mit Scala, Haskell, Kotlin...
-* Mitglied der FP-Community
 
 <!--v-->
 ## Ziel
@@ -140,7 +139,7 @@ Notes:
 Einrückungen und neue Keywords ersetzen Klammern
 
 ```scala
-object Algorithm 
+object Algorithm:
 
     def calc(a: Int, b: Int) : Int =
         var res = a * b
@@ -222,7 +221,7 @@ Note:
 ## Enums
 Parametrisierte Enums
 ```scala
-enum Emoticons(icon: String) 
+enum Emoticons(icon: String):
     case Smile extends Emoticons(":)")
     case Angry extends Emoticons(":(")
     case Kiss extends Emoticons(":*")
@@ -231,7 +230,7 @@ enum Emoticons(icon: String)
 Enums als ADTs
 
 ```scala
-enum Option[+T] 
+enum Option[+T]:
   case Some(x: T) : extends Option[T]
   case None       : extends Option[Nothing]
 ```
@@ -245,7 +244,7 @@ Note:
 ## Extension Methods
 Definition
 ```scala
-object StringExtensions 
+object StringExtensions: 
     def (str: String) toCamelCase: String = 
         str.toLowerCase.split("\\s").foldLeft("")((acc, elem) => 
             s"$acc${elem.substring(0,1).toUpperCase}${elem.substring(1)}")
@@ -285,10 +284,10 @@ Note:
 ## Intersection Types
 Werden durch die Notation `A&B` definiert
 ```scala
-trait UpperCaseable 
+trait UpperCaseable: 
   def uppercase(s: String) : String =  s.toUpperCase
 
-trait Reversable 
+trait Reversable: 
   def reverse(s: String) : String = s.reverse
     
 def convert(in: String, c: UpperCaseable & Reversable) : String = 
@@ -353,18 +352,18 @@ Note:
 ## Given Instances
 
 ```scala
-trait Monoid[T] {
+trait Monoid[T]:
     def combine(a: T, b: T) : T
     def unit : T
-}
+
 ```
 ```scala
-given sumMonoid as Monoid[Int] 
+given sumMonoid as Monoid[Int]: 
     def combine(a: Int, b: Int) : Int =
         a + b
     def unit : Int = 0
 
-given strMonoid as Monoid[String] 
+given strMonoid as Monoid[String]: 
     def combine(a: String, b: String) : String =
         a + b
     def unit : String = ""
