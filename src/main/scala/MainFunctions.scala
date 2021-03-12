@@ -8,6 +8,6 @@ def main(args: Array[String]): Unit = println(s"Hello World")
 
 
 @main def monoidTest(): Unit = 
-    import Monoids.{given _, _}
+    import Monoids.{given, *}
     println(reduce(List(1,2,3,4)))
     println(reduce(List("Hello", " World")))

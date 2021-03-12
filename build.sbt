@@ -1,4 +1,3 @@
-val dottyVersion = "0.27.0-RC1"
 
 // Let 'sbt clean' remove files that may cause the editor to get out-of-sync
 // with the compiler.
@@ -11,12 +10,10 @@ lazy val root = project
     name := "dotty-simple",
     version := "0.1.0",
 
-    scalaVersion := dottyVersion,
+    scalaVersion := "3.0.0-RC1",
     scalacOptions ++= Seq("-Yindent-colons"
                           //"-Yexplicit-nulls"
-    ),
+    )
 
-    libraryDependencies += "com.factor10" %% "intent" % "0.6.0",
-    testFrameworks += new TestFramework("intent.sbt.Framework")
 
   )

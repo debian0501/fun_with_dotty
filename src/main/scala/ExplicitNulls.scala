@@ -4,16 +4,16 @@ object ExplicitNulls {
     def reverse(string: String|Null ): String = 
         string match
             case s: String => s.reverse
-            case _ => ""
+            case null => ""
 
-    def upperReverse(string: String): Int|Null = 
-        string.toUpperCase.length
+    def upperReverse(string: String): String = 
+        val res: String|Null = string.toUpperCase
+        if res != null then res.reverse else ""
 
         
-
-    @main def test():Unit =
+    @main def testExplicitNull():Unit =
         val r1 = reverse(null)
         val r2 = reverse("racecar")
-        //val r3 = upperReverse(null) // Found: Null Required: String
-
+        val r3 = upperReverse("test") // Found: Null Required: String
+        println(r3)
 }

@@ -30,7 +30,7 @@ Note:
 
 <!--v-->
 ## Ziel
-* Wichtigsten Scala 3 Features zeigen
+* Die wichtigsten Scala 3 Features zeigen
 * Lust auf Scala machen
 * __Keine__ vollständige Liste an Feature
 * __Keine__ Scala Einführung
@@ -39,7 +39,7 @@ Note:
 ## Agenda
 * Intro - Was ist Scala 3
 * Neue Features
-* Outro - Zusammenfassung
+* Outro - Persönlicher Eindruck
 
 <!--s-->
 
@@ -49,7 +49,7 @@ Note:
 ## Scala 3 - Codename Dotty 
 * Start 2013: Projekt [Dotty](https://dotty.epfl.ch/)
 * Dezember 2019: Feature Complete
-* Ende 2020: Erstes Release
+* Februar 2021: Erster Release Candidate
 
 <!--v-->
 
@@ -64,11 +64,14 @@ Note:
     * Basis für das Typ System 
     * Ermöglicht Union Types Intersection types...
 * TASTY: typed abstract syntax trees Y
+    * Scala ist im Vergleich zu Java eine Hochsprache
+    * Class files: Informationen gehen verloren
+    * Tasty files ermöglichen Backward und forward Compability mit Scala 2.13
     * Scala Kompatiblitätsprobleme Class-Files unterschiedlicher Versionen
-    * Class files sind zu konkret
-    * Tasty files ermöglichen Backward und forward Compability
     * Scala 3 mit Scala 2 Libs
-    * Alle Scala 3.x Versionen werden kompatibel sein
+    * TASTY Format ist noch nicht final (final in ca. 2 Jahren)  
+    * Dann werden alle Major Versionen kompatibel sein
+    * Breaking Changes nur noch alle 10 Jahre
 
 <!--v-->
 ## Ziele der neuen Features
@@ -76,6 +79,9 @@ Note:
 * Unstimmigkeiten und Fallstricke entfernen
 * Konsistenz und Ausdruckskraft verbessern
 * Bestehende Lücken füllen
+
+Note:
+* Dient auch dazu den Einstieg zu erleichtern.
 
 <!--s-->
 # Neue Features
@@ -168,23 +174,22 @@ Note:
 Opaque Typ-Aliase bieten eine Typ-Abstraktion ohne jeglichen Overhead
 
 ```scala
-object OpaqueType {
+object OpaqueType:
 
-    opaque type Nat = Int
+  opaque type Nat = Int
 
-    object Nat {    
-        def apply(d: Int): Nat = 
-            if(d >= 0) then d 
-                else throw Exception("Nat must be positiv")
-    }
-}
+  object Nat:
+    def apply(d: Int): Nat =
+      if(d >= 0) then d
+        else throw Exception("Nat must be positiv")
 
-@main def test(): Unit = {
+
+  @main def testOpaque() =
     import OpaqueType._
     val n = Nat(1)
     val i: Int = n //error: found OpaqueType.Nat, required Int
-}
 ```
+
 Note:
 * Innerhalb des Objects `OpaqueType` ist Int und Nat identisch
 * Außerhalb nicht
@@ -195,9 +200,8 @@ Note:
 Neues Sprach-Konstrukt zur Definition von Enums.
 
 ```scala
-enum State /* extends java.lang.Enum[State] */{
+enum State: /* extends java.lang.Enum[State] */
     case Solid, Liquid, Gas, Plasma
-}
 ```
 Enum-Methoden
 ```scala
@@ -244,16 +248,17 @@ Note:
 ## Extension Methods
 Definition
 ```scala
-object StringExtensions: 
-    def (str: String) toCamelCase: String = 
-        str.toLowerCase.split("\\s").foldLeft("")((acc, elem) => 
-            s"$acc${elem.substring(0,1).toUpperCase}${elem.substring(1)}")
+object StringExtensions:
+  extension (str: String)
+    def toCamelCase: String =
+      str.toLowerCase.split("\\s").foldLeft("")((acc, elem) =>
+        s"$acc${elem.substring(0,1).toUpperCase}${elem.substring(1)}")
 
 ```
 Nutzung
 ```scala
 @main def toCamelCase(str: String) : Unit = 
-    import StringExtensions._
+    import StringExtensions.*
     println(str.toCamelCase)
 ```
 
@@ -320,13 +325,13 @@ Note:
 def reverse(string: String|Null ): String = 
         string match
             case s: String => s.reverse
-            case _ => ""
+            case null => ""
 
 def upperReverse(string: String): String = 
     val res: String|Null = string.toUpperCase
     if res != null then res.reverse else "" //flow typing
 
-@main def test():Unit =
+@main def test(): Unit =
     val r1 = reverse(null)
     val r2 = reverse("racecar")
     val r3 = upperReverse(null) // Found: Null Required: String
@@ -358,12 +363,12 @@ trait Monoid[T]:
 
 ```
 ```scala
-given sumMonoid as Monoid[Int]: 
+given sumMonoid: Monoid[Int] with
     def combine(a: Int, b: Int) : Int =
         a + b
     def unit : Int = 0
 
-given strMonoid as Monoid[String]: 
+given strMonoid: Monoid[String] with
     def combine(a: String, b: String) : String =
         a + b
     def unit : String = ""
@@ -378,29 +383,30 @@ object MonoidOps
     def reduce[T](x: List[T])(using m: Monoid[T]) : T = 
         x.foldLeft(m.unit)(m.combine)
 ```
-Compiler sucht im Scope nach einger `given`-Instance mit dem passenden Typ
+Compiler sucht im Scope nach einer `given`-Instance mit dem passenden Typ
 
 <!--v-->
 ## Given Import
 
 ```scala
-@main def monoidTest(): Unit = 
-    import Monoids.{given _, _}
-    println(reduce(List(1,2,3,4))) //10
-    println(reduce(List("Hello", " World"))) //Hello World
+@main def monoidTest(): Unit =
+import Monoids.{given, *}
+println(reduce(List(1,2,3,4))) //10
+println(reduce(List("Hello", " World"))) //Hello World
 
 ```
 Verhindert, dass durch einen Wildcard import versehentlich `given`-Intances in den Scope gelangen
 
 <!--v-->
 ## Und noch vieles mehr
+* Context functions
 * Match types
 * Type lambdas
 * Dependent Function types
 * Kind Polymorphism
 * ...
 
-Siehe: [Dotty Documentation](https://dotty.epfl.ch/docs/index.html)
+Siehe: [Scala3 Documentation](https://dotty.epfl.ch/docs/index.html)
 <!--s-->
 
 # Outro
@@ -410,8 +416,8 @@ Siehe: [Dotty Documentation](https://dotty.epfl.ch/docs/index.html)
 * Scala 3 erleichtert den Einstieg in die Sprache 
 * Viele Verbesserungen und neue Features für die tägliche Arbeit
 * Die meisten neuen Konstrukte existieren erstmal parallel zu den alten
-* Mit TASTY als Zwischenformat wird eine sanfte Migration möglich sein
-* Rewrite Tools sollen bestehenen Scala 2 Code größtenteils zu Scala 3 umschreiben können
+* Mit TASTY als Zwischenformat ist eine sanfte Migration möglich
+* Scala 3 compiler kann Scala 2 Code migrieren
 
 <!--v-->
 ## Dankeschön :) und...

@@ -9,8 +9,6 @@ def area(s: Rectangle | Square | Circle) :Double =
         case Circle(r) => Math.pow(r, 2.0) * Math.PI
     }
 
-
-
 def size(number:String | Int): Int = 
     number match {
         case s: String => s.size
